@@ -55,6 +55,8 @@
             }
         }
 
+        $data['gpus'] = $gpus;
+
         return $data;
     }
 ?>
