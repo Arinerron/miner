@@ -38,7 +38,7 @@
 
         $i = 0;
         foreach(explode(';', $json[3]) as $hashrate) {
-            $gpus[$i] = array('hashrate'=>$hashrate);
+            $gpus[$i]['hashrate'] = $hashrate;
             $i++;
         }
 
