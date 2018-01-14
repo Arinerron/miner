@@ -82,30 +82,32 @@
         </style>
     </head>
     <body>
-        <div class="container">
-            <?php $stats = getStats(); ?>
-            <h1>Mining Monitor</h1><br><hr><nr>
-            <h2>Statistics</h2>
-            <table>
-                <tr>
-                    <th>Total Hashrate</th>
-                    <td><?php echo htmlspecialchars($stats['hashrate'] / 1000); ?> MH/s</td>
-                </tr>
-                <tr>
-                    <th>Total Time</th>
-                    <td><?php echo htmlspecialchars($stats['time']); ?> minutes</td>
-                </tr>
-                <tr>
-                    <th>Total Shares</th>
-                    <td><?php echo htmlspecialchars($stats['shares']); ?> shares</td>
-                </tr>
-                <tr>
-                    <th>Total Failures</th>
-                    <td><?php echo htmlspecialchars($stats['fails']); ?> fails</td>
-                </tr>
-            </table><br><br>
+        <center>
+            <div class="container">
+                <?php $stats = getStats(); ?>
+                <h1>Mining Monitor</h1><br><hr><nr>
+                <h2>Statistics</h2>
+                <table>
+                    <tr>
+                        <th>Hashrate</th>
+                        <td><?php echo htmlspecialchars($stats['hashrate'] / 1000); ?> MH/s</td>
+                    </tr>
+                    <tr>
+                        <th>Time</th>
+                        <td><?php echo htmlspecialchars($stats['time']); ?> minutes</td>
+                    </tr>
+                    <tr>
+                        <th>Shares</th>
+                        <td><?php echo htmlspecialchars($stats['shares']); ?> shares</td>
+                    </tr>
+                    <tr>
+                        <th>Failures</th>
+                        <td><?php echo htmlspecialchars($stats['fails']); ?> fails</td>
+                    </tr>
+                </table><br><br>
 
-            <h2>Graphics Cards</h2>
-        </div>
+                <h2>Graphics Cards</h2>
+            </div>
+        </center>
     </body>
 </html>
