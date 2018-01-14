@@ -64,8 +64,41 @@
 <html>
     <head>
         <title>Mining Monitor</title>
+        <style>
+            body {
+                background-color: black;
+                color: green;
+                font-family: monospace;
+            }
+
+            .container {
+                width: 400px;
+                margin: 0 auto;
+            }
+        </style>
     </head>
     <body>
-        <h1><?php echo print_r(getStats());?></h1>
+        <div class="container">
+            <?php $stats = getStats(); ?>
+            <h1>Mining Monitor</h1>
+            <table>
+                <tr>
+                    <th>Total Hashrate</th>
+                    <td><?php echo htmlspecialchars($stats['hashrate'] / 1000); ?> MH/s</td>
+                </tr>
+                <tr>
+                    <th>Total Time</th>
+                    <td><?php echo htmlspecialchars($stats['time']); ?> minutes</td>
+                </tr>
+                <tr>
+                    <th>Total Shares</th>
+                    <td><?php echo htmlspecialchars($stats['shares']); ?> shares</td>
+                </tr>
+                <tr>
+                    <th>Total Failures</th>
+                    <td><?php echo htmlspecialchars($stats['fails']); ?> fails</td>
+                </tr>
+            </table>
+        </div>
     </body>
 </html>
