@@ -75,12 +75,17 @@
                 width: 400px;
                 margin: 0 auto;
             }
+
+            th {
+                text-align: right;
+            }
         </style>
     </head>
     <body>
         <div class="container">
             <?php $stats = getStats(); ?>
-            <h1>Mining Monitor</h1>
+            <h1>Mining Monitor</h1><br><hr><nr>
+            <h2>Statistics</h2>
             <table>
                 <tr>
                     <th>Total Hashrate</th>
@@ -98,7 +103,9 @@
                     <th>Total Failures</th>
                     <td><?php echo htmlspecialchars($stats['fails']); ?> fails</td>
                 </tr>
-            </table>
+            </table><br><br>
+
+            <h2>Graphics Cards</h2>
         </div>
     </body>
 </html>
