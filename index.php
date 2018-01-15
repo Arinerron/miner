@@ -94,7 +94,7 @@
                     </tr>
                     <tr>
                         <th id="right">Shares/Hour</th>
-                        <td><?php echo htmlspecialchars($stats['shares'] / $stats['time'] * 60); ?> shares/hour</td>
+                        <td><?php echo htmlspecialchars(round($stats['shares'] / $stats['time'] * 60)); ?> shares/hour</td>
                     </tr>
                     <tr>
                         <th id="right">Failures</th>
