@@ -107,6 +107,27 @@
                 </table><br><br>
 
                 <h2>Graphics Cards</h2>
+                <table>
+                    <tr>
+                        <th>GPU</th>
+                    </tr>
+                    <tr>
+                        <th>Hashrate</th>
+                    </tr>
+                    <tr>
+                        <th>Temp.</th>
+                    </tr>
+                    <tr>
+                        <th>Fan</th>
+                    </tr>
+                    <?php
+                        $i = 0;
+                        foreach($stats['gpus'] as $gpu) {
+                            $i++;
+                            echo '<tr><td>#' . $i . '</td></tr><tr><td>' . ($gpu['hashrate'] / 1000) . ' MH/s</td></tr><tr><td>' . $gpu['temperature'] . '°C</td></tr><tr><td>' . $gpu['fan'] . '%</td></tr>';
+                        }
+                    ?>
+                </table>
             </div>
         </center>
     </body>
