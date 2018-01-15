@@ -93,12 +93,8 @@
                         <td><?php echo htmlspecialchars($stats['hashrate'] / 1000); ?> MH/s</td>
                     </tr>
                     <tr>
-                        <th id="right">Time</th>
-                        <td><?php echo htmlspecialchars($stats['time']); ?> minutes</td>
-                    </tr>
-                    <tr>
-                        <th id="right">Shares</th>
-                        <td><?php echo htmlspecialchars($stats['shares']); ?> shares</td>
+                        <th id="right">Shares/Hour</th>
+                        <td><?php echo htmlspecialchars($stats['shares'] / $stats['time'] * 60); ?> shares/hour</td>
                     </tr>
                     <tr>
                         <th id="right">Failures</th>
@@ -118,7 +114,7 @@
                         $i = 0;
                         foreach($stats['gpus'] as $gpu) {
                             $i++;
-                            echo '<tr><td>#' . $i . '</td><td>' . ($gpu['hashrate'] / 1000) . ' MH/s</td><td>' . $gpu['temperature'] . '°C</td><td>' . $gpu['fan'] . '%</td></tr>';
+                            echo '<tr><td>#' . $i . '</td><td>' . ($gpu['hashrate'] / 1000) . ' MH/s</td><td' . ($gpu['temperature'] >= 85 ? ' style="color: red;"' : '') . '>' . $gpu['temperature'] . '°C</td><td' . ($gpu['fan'] >= 80 ? ' style="color: orange;"' : '') . '>' . $gpu['fan'] . '%</td></tr>';
                         }
                     ?>
                 </table>
