@@ -94,6 +94,7 @@ update = function() {
         document.getElementById("totalhashrate").innerHTML = 0;
         document.getElementById("totalshareshr").innerHTML = 0;
         document.getElementById("totalfails").innerHTML = 0;
+        document.getElementById("cards").innerHTML = "";
     }
 
     first = false;
