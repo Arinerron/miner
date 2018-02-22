@@ -36,7 +36,7 @@ update = function() {
 update();
 setInterval(update, updatespeed * 1000);
 
-document.getElementById("power").addEventListener('click', function() {
+togglePower = function() {
     doGET("api.php?endpoint=setpower&on=" + !power + "&format=json")
     setPowerEnabled(false);
-}, false);
+}

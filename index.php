@@ -32,7 +32,7 @@
             </div>
             <div id="column" class="col-sm-8">
                 <h2>Controls</h2>
-                <center><input type="button" class="button" id="power" value="Stop Mining" disabled=""></center>
+                <center><input type="button" class="button" id="power" value="Stop Mining" onclick="togglePower()" disabled=""></center>
             </div>
             <div id="column" class="col-sm-12">
                 <h2>Graphics Cards</h2>
