@@ -72,6 +72,7 @@ update = function() {
         var row = table.insertRow(-1);
         for (var i = 0; i < gpus[0].length; i++) {
            var headerCell = document.createElement("th");
+           headerCell.style = "background-color: gray;"
            headerCell.innerHTML = gpus[0][i];
            row.appendChild(headerCell);
         }
