@@ -13,6 +13,12 @@
             <h1 id="heading">Mining Rig - Control Panel</h1>
         </div>
         <div class="row">
+            <div id="column" class="col-sm-8">
+                <h2>Graphics Cards</h2>
+                <table id="cards" width="100%">
+
+                </table>
+            </div>
             <div id="column" class="col-sm-4">
                 <h2>Statistics</h2>
                 <table width="100%">
@@ -28,12 +34,6 @@
                         <th id="right">Failures</th>
                         <td id="left"><div class="inline" id="totalfails">0</div> fails</td>
                     </tr>
-                </table>
-            </div>
-            <div id="column" class="col-sm-8">
-                <h2>Graphics Cards</h2>
-                <table id="cards" width="100%">
-
                 </table>
             </div>
             <div id="column" class="col-sm-12">
