@@ -2,6 +2,7 @@ var updatespeed = 1; // get updates every x seconds
 
 var power = false;
 var ispower = true;
+var last = false;
 
 function doGET(url) {
     var http = new XMLHttpRequest();
@@ -26,14 +27,16 @@ update = function() {
     if(stats.success) {
         if(ispower)
             setPowerEnabled(true);
-        setPower(true);
+        if(!last)
+            setPower(true);
         document.getElementById("totalhashrate").innerHTML = Math.round(stats.hashrate * 10) / 10;
         document.getElementById("totalshareshr").innerHTML = Math.round(stats.shares / stats.time * 60);
         document.getElementById("totalfails").innerHTML = stats.fails;
     } else {
         if(!ispower)
             setPowerEnabled(true);
-        setPower(false);
+        if(last)
+            setPower(false);
         console.log(stats.message);
     }
 }
