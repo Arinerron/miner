@@ -16,7 +16,7 @@
                 } else {
                     // off
                     if(!file_exists($lockfile)) {
-                        fopen($lockfile);
+                        fopen($lockfile, "w");
                     }
                 }
 
