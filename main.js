@@ -7,8 +7,15 @@ var first = true;
 
 function doGET(url) {
     var http = new XMLHttpRequest();
+
+    http.ontimeout = function (e) {
+        return '{"success":false,"message":"Request timed out."}';
+    };
+
+    http.timeout = updatespeed * 1000;
     http.open("GET", url, false);
     http.send(null);
+
     return http.responseText;
 }
 
@@ -42,6 +49,31 @@ update = function() {
         else
             document.getElementById("totalshareshr").innerHTML = 0;
         document.getElementById("totalfails").innerHTML = stats.fails;
+
+        var gpus = new Array();
+        gpus.push(["GPU", "Temperature", "Fan Speed", "Hashrate"]);
+        for(var i = 0; i < stats.gpus.length; i++)
+            gpus.push([i, stats.gpus[i].temperature + "°C", stats.gpus[i].fan + "%", stats.gpus[i].hashrate + " MH/s"]);
+
+        //Create a HTML Table element.
+        var table = document.getElementById("cards");
+
+        //Add the header row.
+        var row = table.insertRow(-1);
+        for (var i = 0; i < gpu[0].length; i++) {
+           var headerCell = document.createElement("TH");
+           headerCell.innerHTML = gpus[0][i];
+           row.appendChild(headerCell);
+        }
+
+        //Add the data rows.
+        for (var i = 1; i < gpu[0].length; i++) {
+           row = table.insertRow(-1);
+           for (var j = 0; j < columnCount; j++) {
+               var cell = row.insertCell(-1);
+               cell.innerHTML = gpus[i][j];
+           }
+        }
     } else {
         if(!ispower)
             setPowerEnabled(true);
@@ -56,6 +88,7 @@ update = function() {
 
     first = false;
 }
+
 update();
 setInterval(update, updatespeed * 1000);
 
