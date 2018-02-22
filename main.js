@@ -67,6 +67,8 @@ update = function() {
 
         var table = document.getElementById("cards");
 
+        table.innerHTML = "";
+
         var row = table.insertRow(-1);
         for (var i = 0; i < gpus[0].length; i++) {
            var headerCell = document.createElement("th");
@@ -76,7 +78,7 @@ update = function() {
 
         for (var i = 1; i < gpus.length; i++) {
            row = table.insertRow(-1);
-           for (var j = 0; j < gpus[0].lengtht; j++) {
+           for (var j = 0; j < gpus[0].length; j++) {
                var cell = row.insertCell(-1);
                cell.innerHTML = gpus[i][j];
            }
