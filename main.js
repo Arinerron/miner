@@ -35,6 +35,7 @@ update = function() {
         if(!last || first)
             updatePower(true);
         setPower(true);
+
         document.getElementById("totalhashrate").innerHTML = Math.round(stats.hashrate * 10) / 10;
         if(stats.time != 0)
             document.getElementById("totalshareshr").innerHTML = Math.round(stats.shares / stats.time * 60);
@@ -47,7 +48,10 @@ update = function() {
         if(last || first)
             updatePower(false);
         setPower(false);
-        console.log(stats.message);
+
+        document.getElementById("totalhashrate").innerHTML = 0;
+        document.getElementById("totalshareshr").innerHTML = 0;
+        document.getElementById("totalfails").innerHTML = 0;
     }
 
     first = false;
@@ -61,10 +65,4 @@ togglePower = function() {
     setPowerEnabled(false);
 
     ispower = !power;
-
-    if(power) {
-        document.getElementById("totalhashrate").innerHTML = 0;
-        document.getElementById("totalshareshr").innerHTML = 0;
-        document.getElementById("totalfails").innerHTML = 0;
-    }
 }
