@@ -74,9 +74,9 @@ update = function() {
            row.appendChild(headerCell);
         }
 
-        for (var i = 1; i < gpus[0].length; i++) {
+        for (var i = 1; i < gpus.length; i++) {
            row = table.insertRow(-1);
-           for (var j = 0; j < columnCount; j++) {
+           for (var j = 0; j < gpus[0].lengtht; j++) {
                var cell = row.insertCell(-1);
                cell.innerHTML = gpus[i][j];
            }
