@@ -11,7 +11,7 @@
                 if(!isset($_REQUEST['on']) || $_REQUEST['on'] === 'true') {
                     // on
                     if(file_exists($lockfile)) {
-                        delete($lockfile);
+                        unlink($lockfile);
                     }
                 } else {
                     // off
