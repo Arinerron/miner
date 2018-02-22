@@ -1,124 +1,50 @@
-<?php
-    function sendMessage($in) {
-        $socket = socket_create(AF_INET, SOCK_STREAM, SOL_TCP);
-        if ($socket === false) {
-            return false;
-        } else {
-            $result = socket_connect($socket, '127.0.0.1', 3333);
-            if ($result === false) {
-                return false;
-            } else {
-                socket_write($socket, $in, strlen($in));
-
-                $out = '';
-                while ($outmsg = socket_read($socket, 2048)) {
-                    $out .= $outmsg;
-                }
-                socket_close($socket);
-
-                return $out;
-            }
-        }
-    }
-
-    function getStats() {
-        $json = json_decode(sendMessage('{"id":0,"jsonrpc":"2.0","method":"miner_getstat1"}'), true)['result'];
-
-        $data = array();
-        $status = explode(';', $json[2]);
-
-        $data['version'] = $json[0];
-        $data['time'] = $json[1]; // minutes
-        $data['hashrate'] = $status[0]; // H/s
-        $data['shares'] = $status[1];
-        $data['fails'] = $status[2];
-        $data['pool'] = $json[7];
-
-        $gpus = array();
-
-        $i = 0;
-        foreach(explode(';', $json[3]) as $hashrate) {
-            $gpus[$i]['hashrate'] = $hashrate;
-            $i++;
-        }
-
-        $i = 0;
-        $switch = false;
-        foreach(explode(';', $json[6]) as $point) {
-            if($switch) {
-                $gpus[$i]['fan'] = $point;
-                $switch = false;
-                $i++;
-            } else {
-                $gpus[$i]['temperature'] = $point;
-                $switch = true;
-            }
-        }
-
-        $data['gpus'] = $gpus;
-
-        return $data;
-    }
-?>
-
 <html>
     <head>
         <title>Mining Monitor</title>
-        <style>
-            body {
-                background-color: black;
-                color: green;
-                font-family: monospace;
-            }
 
-            .container {
-                width: 60%;
-                margin: 0 auto;
-            }
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-            #right {
-                text-align: right;
-            }
-        </style>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <link rel="stylesheet" href="styles.css">
     </head>
-    <body>
-        <center>
-            <div class="container">
-                <?php $stats = getStats(); ?>
-                <h1>Mining Monitor</h1><br><hr><nr>
+    <body class="container">
+        <div class="title">
+            <h1 id="heading">Mining Rig - Control Panel</h1>
+        </div>
+        <div class="row">
+            <div id="column" class="col-sm-4">
                 <h2>Statistics</h2>
-                <table>
+                <table width="100%">
                     <tr>
                         <th id="right">Hashrate</th>
-                        <td><?php echo htmlspecialchars($stats['hashrate'] / 1000); ?> MH/s</td>
+                        <td id="left"><div class="inline" id="totalhashrate"></div> MH/s</td>
                     </tr>
                     <tr>
                         <th id="right">Shares/Hour</th>
-                        <td><?php echo htmlspecialchars(round($stats['shares'] / $stats['time'] * 60)); ?> shares/hour</td>
+                        <td id="left"><div class="inline" id="totalshareshr"></div> shares/hour</td>
                     </tr>
                     <tr>
                         <th id="right">Failures</th>
-                        <td><?php echo htmlspecialchars($stats['fails']); ?> fails</td>
+                        <td id="left"><div class="inline" id="totalfails"></div> fails</td>
                     </tr>
-                </table><br><br>
-
-                <h2>Graphics Cards</h2>
-                <table>
-                    <tr>
-                        <th>GPU</th>
-                        <th>Hashrate</th>
-                        <th>Temp.</th>
-                        <th>Fan</th>
-                    </tr>
-                    <?php
-                        $i = 0;
-                        foreach($stats['gpus'] as $gpu) {
-                            $i++;
-                            echo '<tr><td>#' . $i . '</td><td>' . ($gpu['hashrate'] / 1000) . ' MH/s</td><td' . ($gpu['temperature'] >= 85 ? ' style="color: red;"' : '') . '>' . $gpu['temperature'] . '°C</td><td' . ($gpu['fan'] >= 80 ? ' style="color: orange;"' : '') . '>' . $gpu['fan'] . '%</td></tr>';
-                        }
-                    ?>
                 </table>
             </div>
-        </center>
+            <div id="column" class="col-sm-8">
+                <h2>Controls</h2>
+                <center><input type="button" class="button" id="power" value="Stop Mining" disabled=""></center>
+            </div>
+            <div id="column" class="col-sm-12">
+                <h2>Graphics Cards</h2>
+                <table id="cards" width="100%">
+
+                </table>
+            </div>
+        </div>
+
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+        <script src="main.js"></script>
     </body>
 </html>
