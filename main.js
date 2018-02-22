@@ -19,8 +19,7 @@ function setPowerEnabled(enabled) {
 }
 
 
-
-setInterval(function() {
+update = function() {
     var stats = JSON.parse(doGET("api.php?endpoint=getstats&format=json"));
     setPowerEnabled(stats.success);
 
@@ -31,4 +30,6 @@ setInterval(function() {
     } else {
         console.log(stats.message);
     }
-}, updatespeed * 1000);
+}
+
+setInterval(update, updatespeed * 1000);
