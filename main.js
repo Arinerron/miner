@@ -1,4 +1,4 @@
-var updatespeed = 2; // get updates every x seconds
+var updatespeed = 1; // get updates every x seconds
 
 var power = false;
 
@@ -32,4 +32,5 @@ update = function() {
     }
 }
 
+update();
 setInterval(update, updatespeed * 1000);
