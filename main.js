@@ -68,13 +68,13 @@ update = function() {
         var table = document.getElementById("cards");
 
         var row = table.insertRow(-1);
-        for (var i = 0; i < gpu[0].length; i++) {
+        for (var i = 0; i < gpus[0].length; i++) {
            var headerCell = document.createElement("th");
            headerCell.innerHTML = gpus[0][i];
            row.appendChild(headerCell);
         }
 
-        for (var i = 1; i < gpu[0].length; i++) {
+        for (var i = 1; i < gpus[0].length; i++) {
            row = table.insertRow(-1);
            for (var j = 0; j < columnCount; j++) {
                var cell = row.insertCell(-1);
