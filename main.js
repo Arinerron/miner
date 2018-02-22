@@ -13,6 +13,9 @@ function doGET(url) {
 
 function setPower(pow) {
     power = pow;
+}
+
+function updatePower(pow) {
     document.getElementById("power").value = (power ? "Stop Mining" : "Start Mining");
 }
 
@@ -27,16 +30,21 @@ update = function() {
     if(stats.success) {
         if(ispower)
             setPowerEnabled(true);
-        if(last)
-            setPower(true);
+        if(!last)
+            updatePower(true);
+        setPower(true);
         document.getElementById("totalhashrate").innerHTML = Math.round(stats.hashrate * 10) / 10;
-        document.getElementById("totalshareshr").innerHTML = Math.round(stats.shares / stats.time * 60);
+        if(stats.time != 0)
+            document.getElementById("totalshareshr").innerHTML = Math.round(stats.shares / stats.time * 60);
+        else
+            document.getElementById("totalshareshr").innerHTML = 0;
         document.getElementById("totalfails").innerHTML = stats.fails;
     } else {
         if(!ispower)
             setPowerEnabled(true);
-        if(!last)
-            setPower(false);
+        if(last)
+            updatePower(false);
+        setPower(false);
         console.log(stats.message);
     }
 }

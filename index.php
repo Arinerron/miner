@@ -18,15 +18,15 @@
                 <table width="100%">
                     <tr>
                         <th id="right">Hashrate</th>
-                        <td id="left"><div class="inline" id="totalhashrate"></div> MH/s</td>
+                        <td id="left"><div class="inline" id="totalhashrate">0</div> MH/s</td>
                     </tr>
                     <tr>
                         <th id="right">Shares/Hour</th>
-                        <td id="left"><div class="inline" id="totalshareshr"></div> shares/hour</td>
+                        <td id="left"><div class="inline" id="totalshareshr">0</div> shares/hour</td>
                     </tr>
                     <tr>
                         <th id="right">Failures</th>
-                        <td id="left"><div class="inline" id="totalfails"></div> fails</td>
+                        <td id="left"><div class="inline" id="totalfails">0</div> fails</td>
                     </tr>
                 </table>
             </div>
