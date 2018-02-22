@@ -17,6 +17,7 @@ function setPower(pow) {
 
 function updatePower(pow) {
     document.getElementById("power").value = (pow ? "Stop Mining" : "Start Mining");
+    last = power;
 }
 
 function setPowerEnabled(enabled) {
@@ -65,4 +66,4 @@ togglePower = function() {
     }
 }
 
-setPowerEnabled(true);
+updatePower(true);
