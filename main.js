@@ -41,6 +41,7 @@ update();
 setInterval(update, updatespeed * 1000);
 
 togglePower = function() {
+    document.getElementById("power").value = (power ? "Stopping..." : "Starting...");
     doGET("api.php?endpoint=setpower&on=" + !power + "&format=json")
     setPowerEnabled(false);
 
