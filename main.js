@@ -4,15 +4,23 @@ var power = false;
 var ispower = true;
 var last = false;
 var first = true;
+var requesting = false;
 
 function doGET(url) {
-    var http = new XMLHttpRequest();
+    if(!requesting) {
+        requesting = true;
 
-    http.timeout = updatespeed * 1000;
-    http.open("GET", url, false);
-    http.send(null);
+        var http = new XMLHttpRequest();
 
-    return http.responseText;
+        http.open("GET", url, false);
+        http.send(null);
+
+        requesting = false;
+
+        return http.responseText;
+    } else {
+        return "";
+    }
 }
 
 function setPower(pow) {
