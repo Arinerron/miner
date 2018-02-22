@@ -3,6 +3,7 @@ var updatespeed = 1; // get updates every x seconds
 var power = false;
 var ispower = true;
 var last = false;
+var first = true;
 
 function doGET(url) {
     var http = new XMLHttpRequest();
@@ -31,7 +32,7 @@ update = function() {
     if(stats.success) {
         if(ispower)
             setPowerEnabled(true);
-        if(!last)
+        if(!last || first)
             updatePower(true);
         setPower(true);
         document.getElementById("totalhashrate").innerHTML = Math.round(stats.hashrate * 10) / 10;
@@ -43,11 +44,13 @@ update = function() {
     } else {
         if(!ispower)
             setPowerEnabled(true);
-        if(last)
+        if(last || first)
             updatePower(false);
         setPower(false);
         console.log(stats.message);
     }
+
+    first = false;
 }
 update();
 setInterval(update, updatespeed * 1000);
@@ -65,5 +68,3 @@ togglePower = function() {
         document.getElementById("totalfails").innerHTML = 0;
     }
 }
-
-updatePower(true);
