@@ -41,7 +41,7 @@ update = function() {
     var response = doGET("api.php?endpoint=getstats&format=json");
     var stats = "";
     var success = false;
-    if(response.length() != 0) {
+    if(response.length != 0) {
         var stats = JSON.parse(response);
         var success = true;
     }
