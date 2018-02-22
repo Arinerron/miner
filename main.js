@@ -30,9 +30,15 @@ function setPowerEnabled(enabled) {
 
 
 update = function() {
-    var stats = JSON.parse(doGET("api.php?endpoint=getstats&format=json"));
+    var response = doGET("api.php?endpoint=getstats&format=json");
+    var stats = "";
+    var success = false;
+    if(response.length() != 0) {
+        var stats = JSON.parse(response);
+        var success = true;
+    }
 
-    if(stats.success) {
+    if(success && stats.success) {
         if(ispower)
             setPowerEnabled(true);
         if(!last || first)
