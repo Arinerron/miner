@@ -8,10 +8,6 @@ var first = true;
 function doGET(url) {
     var http = new XMLHttpRequest();
 
-    http.ontimeout = function (e) {
-        return '{"success":false,"message":"Request timed out."}';
-    };
-
     http.timeout = updatespeed * 1000;
     http.open("GET", url, false);
     http.send(null);
@@ -55,18 +51,15 @@ update = function() {
         for(var i = 0; i < stats.gpus.length; i++)
             gpus.push([i, stats.gpus[i].temperature + "°C", stats.gpus[i].fan + "%", stats.gpus[i].hashrate + " MH/s"]);
 
-        //Create a HTML Table element.
         var table = document.getElementById("cards");
 
-        //Add the header row.
         var row = table.insertRow(-1);
         for (var i = 0; i < gpu[0].length; i++) {
-           var headerCell = document.createElement("TH");
+           var headerCell = document.createElement("th");
            headerCell.innerHTML = gpus[0][i];
            row.appendChild(headerCell);
         }
 
-        //Add the data rows.
         for (var i = 1; i < gpu[0].length; i++) {
            row = table.insertRow(-1);
            for (var j = 0; j < columnCount; j++) {
