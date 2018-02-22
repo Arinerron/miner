@@ -21,16 +21,22 @@ function setPowerEnabled(enabled) {
 
 update = function() {
     var stats = JSON.parse(doGET("api.php?endpoint=getstats&format=json"));
-    setPowerEnabled(stats.success);
+    setPowerEnabled(true);
 
     if(stats.success) {
-        document.getElementById("totalhashrate").innerHTML = stats.hashrate;
+        setPower(true);
+        document.getElementById("totalhashrate").innerHTML = Math.round(stats.hashrate * 10) / 10;
         document.getElementById("totalshareshr").innerHTML = Math.round(stats.shares / stats.time * 60);
         document.getElementById("totalfails").innerHTML = stats.fails;
     } else {
+        setPower(false);
         console.log(stats.message);
     }
 }
-
 update();
 setInterval(update, updatespeed * 1000);
+
+document.getElementById("power").addEventListener('click', function() {
+    doGET("api.php?endpoint=setpower&on=" + !power + "&format=json")
+    setPowerEnabled(false);
+}, false);
