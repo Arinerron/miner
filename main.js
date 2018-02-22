@@ -27,7 +27,7 @@ update = function() {
     if(stats.success) {
         if(ispower)
             setPowerEnabled(true);
-        if(!last)
+        if(last)
             setPower(true);
         document.getElementById("totalhashrate").innerHTML = Math.round(stats.hashrate * 10) / 10;
         document.getElementById("totalshareshr").innerHTML = Math.round(stats.shares / stats.time * 60);
@@ -35,7 +35,7 @@ update = function() {
     } else {
         if(!ispower)
             setPowerEnabled(true);
-        if(last)
+        if(!last)
             setPower(false);
         console.log(stats.message);
     }
