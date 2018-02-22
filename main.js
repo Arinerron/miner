@@ -1,6 +1,7 @@
 var updatespeed = 1; // get updates every x seconds
 
 var power = false;
+var ispower = true;
 
 function doGET(url) {
     var http = new XMLHttpRequest();
@@ -21,14 +22,17 @@ function setPowerEnabled(enabled) {
 
 update = function() {
     var stats = JSON.parse(doGET("api.php?endpoint=getstats&format=json"));
-    setPowerEnabled(true);
 
     if(stats.success) {
+        if(ispower)
+            setPowerEnabled(true);
         setPower(true);
         document.getElementById("totalhashrate").innerHTML = Math.round(stats.hashrate * 10) / 10;
         document.getElementById("totalshareshr").innerHTML = Math.round(stats.shares / stats.time * 60);
         document.getElementById("totalfails").innerHTML = stats.fails;
     } else {
+        if(!ispower)
+            setPowerEnabled(true);
         setPower(false);
         console.log(stats.message);
     }
@@ -39,4 +43,12 @@ setInterval(update, updatespeed * 1000);
 togglePower = function() {
     doGET("api.php?endpoint=setpower&on=" + !power + "&format=json")
     setPowerEnabled(false);
+
+    ispower = !power;
+
+    if(power) {
+        document.getElementById("totalhashrate").innerHTML = 0;
+        document.getElementById("totalshareshr").innerHTML = 0;
+        document.getElementById("totalfails").innerHTML = 0;
+    }
 }
