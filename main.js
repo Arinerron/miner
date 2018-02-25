@@ -65,7 +65,7 @@ update = function() {
         gpus.push(["GPU", "Temperature", "Fan Speed", "Hashrate"]);
         for(var i = 0; i < stats.gpus.length; i++) {
             if(gpuavg[i] != 0)
-                gpuavg[i] = (gpuavg[i] + stats.gpus[i].hashrate) / 2;
+                gpuavg[i] = (0.4*gpuavg[i] + 0.6*stats.gpus[i].hashrate) / 2;
             else
                 gpuavg[i] = stats.gpus[i].hashrate;
             gpus.push([i, stats.gpus[i].temperature + "°C", stats.gpus[i].fan + "%", stats.gpus[i].hashrate + " MH/s"]);
