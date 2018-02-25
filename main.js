@@ -64,8 +64,9 @@ update = function() {
         var gpus = new Array();
         gpus.push(["GPU", "Temperature", "Fan Speed", "Hashrate"]);
         for(var i = 0; i < stats.gpus.length; i++)
-            gpus.push([i, stats.gpus[i].temperature + "°C", stats.gpus[i].fan + "%", stats.gpus[i].hashrate + " MH/s"]);
-            gpuavg[i] = (gpuavg[i] + stats.gpus[i].hashrate) / 2;
+            var data = {stats.gpus[i].temperature, stats.gpus[i].fan, stats.gpus[i].hashrate};
+            gpus.push([i, data[0] + "°C", data[1] + "%", data[2] + " MH/s"]);
+            gpuavg[i] = (gpuavg[i] + data[2]) / 2;
 
         var table = document.getElementById("cards");
 
