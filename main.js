@@ -69,7 +69,7 @@ update = function() {
             else
                 gpuavg[i] = stats.gpus[i].hashrate;*/
             gpuavg[i].push(stats.gpus[i].hashrate);
-            gpus.push([i, stats.gpus[i].temperature + "°C", stats.gpus[i].fan + "%", stats.gpus[i].hashrate + " MH/s"]);
+            gpus.push([i, stats.gpus[i].temperature + "°C", stats.gpus[i].fan + "%", Number.parseFloat(stats.gpus[i].hashrate).toPrecision(6) + " MH/s"]);
         }
 
         var table = document.getElementById("cards");
