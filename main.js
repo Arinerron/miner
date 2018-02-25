@@ -36,7 +36,7 @@ function setPowerEnabled(enabled) {
     document.getElementById("power").disabled = !enabled;
 }
 
-var gpuavg = []
+var gpuavg = [0,0,0,0,0,0,0,0,0,0,0];
 
 update = function() {
     var response = doGET("api.php?endpoint=getstats&format=json");
@@ -64,7 +64,10 @@ update = function() {
         var gpus = new Array();
         gpus.push(["GPU", "Temperature", "Fan Speed", "Hashrate"]);
         for(var i = 0; i < stats.gpus.length; i++) {
-            gpuavg[i] = (gpuavg[i] + stats.gpus[i].hashrate) / 2;
+            if(gpuavg[i] != 0)
+                gpuavg[i] = (gpuavg[i] + stats.gpus[i].hashrate) / 2;
+            else
+                gpuavg[i] = stats.gpus[i].hashrate;
             gpus.push([i, stats.gpus[i].temperature + "°C", stats.gpus[i].fan + "%", stats.gpus[i].hashrate + " MH/s"]);
         }
 
