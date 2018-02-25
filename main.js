@@ -36,7 +36,7 @@ function setPowerEnabled(enabled) {
     document.getElementById("power").disabled = !enabled;
 }
 
-var gpuavg = [[],[],[],[],[],[],[],[],[],[],[]];
+var gpuavg = [[],[],[],[],[],[]];
 
 update = function() {
     var response = doGET("api.php?endpoint=getstats&format=json");
