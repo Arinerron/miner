@@ -7,7 +7,7 @@
                 dump(getStats());
                 break;
             case 'setpower':
-                $lockfile = '/home/miner/stopminer.lock';
+                $lockfile = '/tmp/stopminer.lock';
                 if(!isset($_REQUEST['on']) || $_REQUEST['on'] === 'true') {
                     // on
                     if(file_exists($lockfile)) {
